@@ -14,6 +14,7 @@
     "@discordjs/opus": "^0.7.0",
     "@discordjs/voice": "^0.8.0",
     "@distube/spotify": "^1.2.1",
+    "@distube/ytdl-core": "^4.10.0",
     "@iamtraction/google-translate": "github:iamtraction/google-translate",
     "@replit/database": "^2.0.1",
     "ascii-table": "0.0.9",

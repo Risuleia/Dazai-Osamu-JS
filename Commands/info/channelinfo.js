@@ -6,9 +6,7 @@ module.exports = {
   description: 'Shows the information about a channel.',
   execute: async (client, message, args, db) => {
 
-    if (!args.length) return message.reply("You need to specify a channel to get its information.")
-
-    let channel = await message.guild.channels.cache.find(c => c.name.toLowerCase().includes(args.join(` `).toLowerCase())) || await message.mentions.channels.first() || await message.guild.channels.cache.find(c => c.id == args[0]);
+    let channel = !args.length ? await message.channel : await message.guild.channels.cache.find(c => c.name.toLowerCase().includes(args.join(` `).toLowerCase())) || await message.mentions.channels.first() || await message.guild.channels.cache.find(c => c.id == args[0]);
 
     if (!channel) return message.reply('Channel not found.')
 

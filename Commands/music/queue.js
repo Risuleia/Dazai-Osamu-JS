@@ -4,7 +4,7 @@ const { showQueue } = require('../../Utilities/music.js');
 module.exports = {
 	name: 'queue',
 	aliases: [],
-	description: "Queues the playback.",
+	description: "Shows the song queue.",
 	botPermissions: ['CONNECT', 'SPEAK'],
 	execute: async (client, message, args, db) => {
 
@@ -13,7 +13,7 @@ module.exports = {
 
 		const queue = await client.distube.getQueue(voiceChan)
 
-		if (!queue) return message.reply("You need to first play something to queue.")
+		if (!queue) return message.reply("You need to first play something to get the queue.")
 
 		const songs = Array.from(await showQueue(queue));
 		const song = await queue.songs[0]

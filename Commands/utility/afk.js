@@ -10,7 +10,7 @@ module.exports = {
     client.afk.set(`${message.guild.id}_${message.author.id}`, [Date.now(), reason])
 
     message.reply({
-      content: `${message.member.nickname || message.author.username}, I've set your AFK: ${reason}`
+      content: `${message.member.toString()}, I've set your AFK: ${reason}`
     })
 
     if (message.member.manageable) {

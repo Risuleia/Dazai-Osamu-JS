@@ -8,7 +8,7 @@ module.exports = {
 
     if (!args.length) return message.reply("You need to specify a member, followed by a role to remove/add.")
 
-    let re = /("|')(.*?)("|')/g
+    let re = /("|')(.+?)("|')/g
     let re2 = /"|'/g
 
     let compoundMatches = args.join(` `).match(re)?.map(m => m.replace(re2, ''));

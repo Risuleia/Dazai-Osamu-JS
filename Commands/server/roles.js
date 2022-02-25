@@ -29,7 +29,7 @@ module.exports = {
       embeds: embeds,
       message: message,
       channel: message.channel,
-      time: 20000,
+      time: 60000,
       fastSkip: true
     })
 

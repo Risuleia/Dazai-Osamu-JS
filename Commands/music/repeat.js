@@ -14,7 +14,22 @@ module.exports = {
 
 		if (!queue) return message.reply("You need to first play something to do that.")
 		
-		repeat(queue, message, args[0])
+		repeat(queue)
+
+		let mode;
+		if (await queue.repeatMode == 0) mode = 'Disabled'
+		if (await queue.repeatMode == 1) mode = 'Song'
+		if (await queue.repeatMode == 2) mode = 'Queue'
+
+		message.channel.send({
+			embeds: [{
+				color: 0xD4C2DD,
+				title: "Changed Repeat Mode",
+				description: `**Repeat Mode:** ${mode}`
+			}],
+			reply: { messageReference: message.id },
+			allowedMentions: { repliedUser: false }
+		})
 		
 	}
 }

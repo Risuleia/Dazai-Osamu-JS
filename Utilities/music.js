@@ -39,11 +39,12 @@ const stop = async (voice_channel, queue) => {
 	await queue.stop(voice_channel)
 }
 
-const repeat = async (queue, message, param) => {
-	if (!param || param?.toLowerCase() == 'off') return await queue.setRepeatMode(0)
-	else if (['one', '1', 'song'].some(p => p == param?.toLowerCase())) return await queue.setRepeatMode(1)
-	else if (['queue', 'list', '2', 'all'].some(p => p == param?.toLowerCase())) return await queue.setRepeatMode(2)
-	else return message.reply("Not a valid parameter.")
+const repeat = async (queue) => {
+	// if (!param || param?.toLowerCase() == 'off') return await queue.setRepeatMode(0)
+	// else if (['one', '1', 'song'].some(p => p == param?.toLowerCase())) return await queue.setRepeatMode(1)
+	// else if (['queue', 'list', '2', 'all'].some(p => p == param?.toLowerCase())) return await queue.setRepeatMode(2)
+	// else return message.reply("Not a valid parameter.")
+	await queue.setRepeatMode()
 }
 
 const shuffle = async (voice_channel, queue) => {

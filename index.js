@@ -6,7 +6,7 @@ const fs = require('fs');
 
 // Creating the client
 const client = new Client({
-    intents: 32767,
+	intents: 32767,
 });
 
 // Creating the voice client
@@ -21,7 +21,6 @@ module.exports = client;
 
 // Web server
 const alive = require('./server');
-
 
 // Global Variables
 client.commands = new Collection();

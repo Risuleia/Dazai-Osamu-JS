@@ -13,14 +13,15 @@ module.exports = {
     
     var time;
     var reply;
-    await message.reply({
+    await message.channel.send({
       content: 'Type this asap:',
       files: [
         {
           attachment: await attachment,
           name: 'quote.png'
         }
-      ]
+      ],
+			reply: { messageRefrence: message.id }
     }).then(message => {
       time = message.createdTimestamp
       reply = message
@@ -46,14 +47,14 @@ module.exports = {
       let chars = quote.length;
       const typingSpeed = Math.round((chars / 5) / timeTakenMin)
 
-      m.reply({
-
+      m.channel.send({
         embeds: [
           {
             color: 0xebca6e,
             description: `${author} typed it in ${timeTaken}s (${typingSpeed} WPM)!`
           }
         ],
+				reply: { messageReference: m.id },
         allowedMentions: { repliedUser: false }
       })
       collector.stop()
@@ -62,13 +63,14 @@ module.exports = {
 
     collector.on('end', async collected => {
       
-      if (collected.size == 0) reply.reply({
+      if (collected.size == 0) message.channel.send({
         embeds: [
           {
             color: 0xebca6e,
             description: 'No one typed it in time!'
           }
         ],
+				reply: { messageReference: reply.id },
         allowedMentions: { repliedUser: false }
       })
       
