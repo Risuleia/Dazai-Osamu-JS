@@ -1,1 +1,5 @@
 run = "while true; do npm start; sleep 2; done"
+
+[auth]
+pageEnabled = false
+buttonEnabled = false

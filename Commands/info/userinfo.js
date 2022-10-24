@@ -2,7 +2,7 @@ const moment = require('moment');
 
 module.exports = {
   name: 'userinfo',
-  aliases: ['ui'],
+  aliases: ['ui','uinfo'],
   description: 'Shows the information about a member.',
   execute: async (client, message, args, db) => {
 
@@ -56,6 +56,7 @@ module.exports = {
         }
       ],
       footer: { text: `ID: ${user.id}` },
+			image: { url: await user.user.fetch({ force: true }).then(u => u.bannerURL({ size: 2048, dynamic: true })) },
       timestamp: new Date()
     }
 

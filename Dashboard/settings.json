@@ -1,0 +1,11 @@
+{
+	"website": {
+			"domain" : "https://Dazai-Osamu-JS.risuleia.repl.co"
+	},
+	"config": {
+			"port": 3000,
+			"callback": "https://Dazai-Osamu-JS.risuleia.repl.co/callback",
+			"clientID": "937307272433000509",
+			"secret": "aX528N111j_dq-cDw8iB-uziUszMVdyZ"
+	}
+}

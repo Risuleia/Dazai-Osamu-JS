@@ -2,7 +2,7 @@ const moment = require('moment');
 
 module.exports = {
   name: 'channelinfo',
-  aliases: ['ci'],
+  aliases: ['ci','cinfo'],
   description: 'Shows the information about a channel.',
   execute: async (client, message, args, db) => {
 

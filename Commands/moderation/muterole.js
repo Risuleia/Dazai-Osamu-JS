@@ -8,77 +8,112 @@ module.exports = {
 
     const muteRole = await db.get(`muterole_${message.guild.id}`);
 
-    if (args[0] === 'add') {
+		const subcmd = ['create', 'add', 'set', 'show', 'reset', 'delete']
 
-      if (muteRole) return message.reply('A mute-role has already been set.')
+		const param = args[0].toLowerCase()
 
-      try {
+		if (subcmd.slice(0,2).some(cmd => param == cmd)) {
 
-        message.guild.roles.create({
-          name: 'Muted',
-          color: 'RED',
-          reason: 'mute-role',
-        }).then(role => {
+			if (muteRole) return message.channel.send({
+				content: 'A mute-role has already been set.',
+				reply: { messageReference: message.id }
+			})
 
-          db.set(`muterole_${message.guild.id}`, role.id)
+			try {
+				message.guild.roles.create({
+					name: args?.slice(1,args.length)?.join(` `) ||  'Muted',
+					color: 'RED',
+					reason: 'mute-role'
+				}).then(role => {
 
-          message.guild.channels.cache.forEach(channel => {
-            channel.permissionOverwrites.create(role, {
-              SEND_MESSAGES: false
-            })
-          })
+					db.set(`muterole_${message.guild.id}`, role.id)
 
-          message.reply(`Mute-role set to ${role}!`)
+					message.guild.channels.cache.forEach(channel => {
+						channel.permissionOverwrites.create(role, {
+							SEND_MESSAGES: false
+						})
+					})
+	
+					message.channel.send({
+						content: `Mute-role set to ${role}!`,
+						reply: { messageReference: message.id },
+						allowedMentions: { repliedUser: false, roles: false }
+					})
+					
+				})
+			} catch (err) {
+				message.channel.send({
+					content: 'An error occured while trying to process your request.',
+					reply: { messageReference: message.id }
+				})
+				throw err
+			}
+			
+		}
+		else if (param == subcmd[2]) {
 
-        })
+			if (!args.length || args.length < 2) return message.channel.send({
+				content: 'You need to specify a role to set as the mute-role.',
+				reply: { messageReference: messasge.id }
+			})
 
-      } catch {
-        e => message.reply('Some error occured while trying to process your request.')
-      }
+			let role = await message.guild.roles.cache.find(r => r.name.toLowerCase().includes(args.slice(1,args.length).join(` `).toLowerCase())) || await message.mentions.roles.first() || await message.guild.roles.cache.find(r => r.id == args[1]);
 
-    }
+			if (!role) return message.channel.send({
+				content: 'That role doesn\'t exist.',
+				reply: { messageReference: message.id }
+			})
 
-    if (args[0] === 'set') {
+			try {
+				await db.set(`muterole_${message.guild.id}`,role.id)
 
-      // if (muteRole) return message.reply('A mute-role has already been set.')
+				message.guild.channels.cache.forEach(channel => {
+					channel.permissionOverwrites.create(role, {
+						SEND_MESSAGES: false
+					})
+				})
 
-      let targetRole;
+				message.channel.send({
+					content: `Mute-role set to ${role}!`,
+					reply: { messageReference: message.id },
+					allowedMentions: { repliedUser: false, roles: false}
+				})
+			} catch (err) {
+					message.channel.send({
+						content: 'An error occured while rying to process your request.',
+						reply: { messageReference: message.id }
+				})
+			}
+			
+		}
+		else if (param == subcmd[3]) {
+			
+			const role = await message.guild.roles.cache.find(r => r.id == muteRole)
+			
+			const embed = {
+				color: 0xE6D0CE,
+				description: role ? `Current mute-role is ${role}` : `No mute-role set!`
+			}
 
-      if (!isNaN(parseInt(args[0]))) {
-
-        targetRole = await message.guild.roles.fetch(args[0]) || null;
-
-        if (!targetRole) return message.reply("That role doesn't exist.")
-
-        try {
-          
-          db.set(`muterole_${message.guild.id}`, targetRole.id)
-
-          message.reply(`Mute-role set to ${targetRole}!`)
-
-        } catch {
-          e => message.reply("Some error occured while trying to process your request.") 
-        }
-
-      } else if (message.mentions) {
-        
-        targetRole = await message.mentions.roles.first() || null;
-
-        if (!targetRole) return message.reply("That role doesn't exist.")
-
-        try {
-          
-          db.set(`muterole_${message.guild.id}`, targetRole.id)
-
-          message.reply(`Mute-role set to ${targetRole}!`)
-
-        } catch {
-          e => message.reply("Some error occured while trying to process your request.") 
-        }
-
-      }
-
-    }
-
+			message.channel.send({
+				embeds: [embed],
+				reply: { messageReference: message.id },
+				allowedMentions: { repliedUser: false }
+			})
+			
+		}
+		else if (param == subcmd[4] || param == subcmd[5]) {
+			db.delete(`muterole_${message.guild.id}`)
+			message.channel.send({
+				content: 'Reset the mute-role!',
+				reply: { messageReference: message.id },
+				allowedMentions: { repliedUser: false }
+			})
+		}
+		else return message.channel.send({
+			content: 'Not a valid parameter.',
+			reply: { messageReference: message.id }
+		})
+		
   }
 }

@@ -1,0 +1,24 @@
+<%- include('base-header') -%>
+<div id="main">
+    <h1 class="heading text-uppercase odd">Commands</h1>
+    <section class="commands-section">
+        <% commands.forEach(async command => { %>
+            <%- `<div class="block" id="${command}">` %>
+                <div class="block-card">
+                    <div class="block-card-title-section">
+                        <%- `<h3 class="block-card-title"><a href="#${command.name}">${command.name}</a></h3>` %>
+                        <%- `<h4 class="block-card-aliases">${(!command.aliases || command.aliases.length == 0) ? command.name : command.aliases.join('<div>|</div>')}</h4>` %>
+                    </div>
+                    <div class="block-body">
+                        <div class="quote-block"></div>
+                        <div class="block-card-body-section">
+                            <%- `<p class="block-card-description">${command.description}</p>` %>
+                            <%- `<p class="block-card-type"><strong>Type:</strong>${command.directory.toUpperCase()}</p>` %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </section>
+</div>
+<%- include('base-footer') -%>

@@ -8,18 +8,22 @@ module.exports = {
 			reply: { messageReference: message.id }
 		})
 
-    function isEmpty(collection) {
-      if (Array.from(collection).length > 0) {
-        return false
-      }
-      return true
-    }
+		// console.log(await message.guild.members.fetch({ query: args.join(` `) }).then(users => users.first()).then(u => u.user))
 
-    let userQuery = await message.guild.members.fetch({ query: args[0], limit: 1 });
+    // function isEmpty(collection) {
+    //   if (Array.from(collection).length > 0) {
+    //     return false
+    //   }
+    //   return true
+    // }
 
-    let target = !args[0] ? await message.member : await message.guild.members.fetch({ query: args[0], limit: 1}, {force: true}).then(members => members.first()) || await message.mentions.members.first() || args[0];
+    // let userQuery = await message.guild.members.fetch({ query: args[0], limit: 1 });
+
+    // let target = !args[0] ? await message.member : await message.guild.members.fetch({ query: args[0], limit: 1}, {force: true}).then(members => members.first()) || await message.mentions.members.first() || args[0];
     
-    console.log(await target)
+    // console.log(await target)
+
+		// console.log(client.commands.map(commands => commands))
 
   }
 }

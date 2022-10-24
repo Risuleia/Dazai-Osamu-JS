@@ -206,13 +206,13 @@ const raw = {
 	i: {
     variant_italic: '𝘪',
     variant_style: '𝒾',
-    variant_bold: '𝗷',
+    variant_bold: '𝗶',
     variant_monospace: 'ɪ'
   },
 	j: {
     variant_italic: '𝘫',
     variant_style: '𝒿',
-    variant_bold: '𝗶',
+    variant_bold: '𝗷',
     variant_monospace: 'ᴊ'
   },
 	k: {

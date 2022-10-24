@@ -3,7 +3,7 @@ const ms = require('ms');
 module.exports = {
   name: 'untimeout',
   aliases: ['utm'],
-  description: 'Timeouts a specified user.',
+  description: 'Removes the timeout for a aspecified member.',
   userPermissions: ['MODERATE_MEMBERS'],
   botPermissions: ['MODERATE_MEMBERS'],
   execute: async (client, message, args, db) => {

@@ -1,37 +1,38 @@
 module.exports = {
-  name: 'avatar',
-  aliases: ['av'],
-  description: 'Displays the avatar of a specified user.',
-  execute: async (client, message, args, db) => {
-    
-    if (args.length === 0) return message.reply({
-      embeds: [{
-        color: 0xffcba4,
-        title: `Avatar for ${message.author.tag}`,
-        image: { url: message.author.avatar ? await message.author.displayAvatarURL({ size: 2048, dynamic: true }) : null },
-      }],
-      allowedMentions: { repliedUser: false }
-    })
+	name: 'avatar',
+	aliases: ['av'],
+	description: 'Displays the avatar for a specified user.',
+	execute: async (client, message, args, db) => {
 
-    let target = await message.guild.members.fetch({ query: args[0], limit: 1 }).then(members => members.first())
-              || await message.mentions.members.first()
-              || await message.guild.members.cache.find(u => u.id == args[0])
-              || await message.member;
+		const user = !args.length ? await message.member.user : await client.users.cache.find(u => u.id == args[0]) || await message.guild.members.fetch({ query: args.join(` `) }).then(users => users.first()).then(u => u.user) || await message.mentions.users.first()
 
-    let avatar = target?.user.avatar ? await target.displayAvatarURL({ size: 2048, dynamic: true }) : null;
+		if (!user) return message.channel.send({
+			embeds: [{
+				color: 0xffcba4,
+				description: "User not found :("
+			}],
+			reply: { messageReference: message.id }
+		})
 
-    const avatarEmbed = {
-      color: 0xffcba4,
-      title: target ? `Avatar for ${client.users.cache.find(u => u.id == args[0]) ? target.tag : target.user.tag}` : "User not found! :(",
-      image: { url: avatar },
-    }
+		const target = await user.fetch({ force: true })
 
-    try {
-      message.reply({
-        embeds: [avatarEmbed],
-        allowedMentions: { repliedUser: false }
-      })
-    } catch { err => console.log(err) }
+		const avatar = target.avatar ? await user.displayAvatarURL({ size: 2048, dynamic: true }) : null
 
-  }
+		const emb = {
+			color: 0xffcba4,
+			title: avatar ? `Avatar for ${target.username}#${target.discriminator}` : 'This user doesn\'t have an avatar!',
+			image: { url: avatar }
+		}
+
+		try {
+			message.channel.send({
+				embeds: [emb],
+				reply: { messageReference: message.id },
+				allowedMentions: { repliedUser: false }
+			})
+		} catch (err) {
+			throw err
+		}
+		
+	}
 }

@@ -15,7 +15,7 @@ module.exports = {
     let roleMembers = members
             .filter(m => m.roles.cache.has(role.id))
             .sort((a,b) => b.roles.highest.position - a.roles.highest.position)
-            .map(m => `${m.user.tag}\n> ꒰${m.id}꒱`)
+            .map(m => `${m}\n> ꒰${m.id}꒱`)
 
     let desc;
     if (!roleMembers || !roleMembers.length) desc = 'No users with this role!'

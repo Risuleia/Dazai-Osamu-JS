@@ -1,0 +1,78 @@
+<%- include('base-header') -%>
+<div id="main">
+    <h1 class="heading text-uppercase odd">Stats</h1>
+    <section class="graph-section">
+        <div class="graphs" selectable="false">
+            <div class="graph-1">
+                <div>
+                    <%- `<h2>${Math.round(ping)}ms</h2>` %>
+                    <p>Bot Latency</p>
+                </div>
+            </div>
+            <div class="graph-2">
+                <div>
+                    <h2><%= users  %></h2>
+                    <p>Users</p>
+                </div>
+            </div>
+            <div class="graph-3">
+                <div>
+                  <h2><%= guilds %></h2>            <p>Servers</p>                </div>            </div>       <div class="graph-4">
+                <div>
+                     <h2><%= commands %></h2>
+                    <p>Commands</p>
+                </div>
+            </div>
+        </div>
+        <div class="tip">
+            <div class="arrow">
+                <img src="/arrow.png" alt="arrow" selectable="false">
+                <img src="/chibis/chibi-1.png" alt="arrow-img" selectable="false">
+            </div>
+            <p class="tip-text" selectable="false">Looking for the dashboard?</p>
+        </div>
+    </section>
+    <div class="section-divider even"></div>
+    <h1 class="heading text-uppercase even">About</h1>
+    <section class="about-section">
+        <img src="/chibis/chibi-2.jpg" class="img-fluid rounded-circle fluid-logo" selectable="false" alt="logo">
+        <div class="about">
+            <p>Firstly, let's get briefed about the introductory parts. Well, I'm <a href="https://github.com/Risuleia" target="_blank" rel="noopener noreferrer">Risu</a>. I created this bot as a learning project. As expected, it did help me in mastering the MERN tech stack which I had already had been trying to master since quite some time. Overall, the project took about a month.</p>
+            <p>
+                Really thankful to all the people who helped me make this bot!
+                <ul>
+                    <li>First and most foremost, I'd like to credit the devs of the <a href="https://discord.js.org" target="_blank" rel="noopener noreferrer">discord.js</a> library, which really simplified the development phase.</li>
+                    <li>Then, we have
+                        <div class="link-hover">
+                            <a href="https://discordapp.com/users/800686782114693180" target="_blank" rel="noopener noreferrer">mimi</a>
+                            <div class="links">
+                                <div class="discord-card">
+                                    <%- `<img src="https://cdn.discordapp.com/avatars/${devs.mimi?.id}/${devs.mimi?.avatar}.png" alt="avatar" selectable="false">` %>
+                                    <div class="discord-card-body" selectable="false">
+                                        <%- `<p>${devs.mimi?.username}</p>
+																					<p>#${devs.mimi?.discriminator}</p>` %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>. Throughout the whole development phase, she constantly helped with the debugging.
+                    </li>
+                    <li><div class="link-hover">
+                            <a href="https://discordapp.com/users/497959318310748181" target="_blank" rel="noopener noreferrer">miv</a>
+                            <div class="links">
+                                <div class="discord-card">
+                                    <%- `<img src="https://cdn.discordapp.com/avatars/${devs.miv?.id}/${devs.miv?.avatar}.png" alt="avatar" selectable="false">` %>
+                                    <div class="discord-card-body" selectable="false">
+                                        <%- `<p>${devs.miv?.username}</p>
+																					<p>#${devs.miv?.discriminator}</p>` %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> helped as well, in providing various resources for the bot, ranging from color schemes to images, and what not.
+                    </li>
+                    <li>Finally, the many testers who tested this bot! All the love to them!</li>
+                </ul>
+            </p>
+        </div>
+    </section>
+</div>
+<%- include('base-footer') -%>

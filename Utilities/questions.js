@@ -2,9 +2,7 @@ const fetch = require('node-fetch')
 const hye_dat = require('./hye.json')
 
 const td_base = 'https://raw.githubusercontent.com/sylhare/Truth-or-Dare/master/src/output.json'
-const wyr_base = 'https://would-you-rather-api.abaanshanid.repl.co/'
 let td_data = fetch(td_base).then(res => res.json())
-let wyr_data = fetch(wyr_base).then(res => res.json())
 
 const truth = async (message, lvl) => {
 	let level;
@@ -62,27 +60,6 @@ const dare = async (message, lvl) => {
 	
 }
 
-const wyr = async (message) => {
-
-	let dat = await wyr_data
-	let question = dat.data.replace(/would you rather */gi, '')
-
-	message.channel.send({
-		embeds: [{
-			color: 'RANDOM',
-			fields: [
-				{
-					name: 'Would you rather',
-					value: question
-				}
-			]
-		}],
-		reply: { messageReference: message.id },
-		allowedMentions: { repliedUser: false }
-	})
-	
-} 
-
 const hye = async (message) => {
 
 	let hye_data = await hye_dat
@@ -107,6 +84,5 @@ const hye = async (message) => {
 module.exports = {
 	truth: truth,
 	dare: dare,
-	wyr: wyr,
 	hye: hye
 }

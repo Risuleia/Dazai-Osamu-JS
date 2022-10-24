@@ -2,7 +2,7 @@ const moment = require('moment');
 
 module.exports = {
   name: 'serverinfo',
-  aliases: ['si'],
+  aliases: ['si','sinfo'],
   description: 'Shows the server information.',
   execute: async (client, message, args, db) => {
 

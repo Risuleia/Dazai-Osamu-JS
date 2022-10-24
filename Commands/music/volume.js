@@ -2,7 +2,7 @@ const { volume } = require('../../Utilities/music.js');
 
 module.exports = {
 	name: 'volume',
-	aliases: [],
+	aliases: ['vol'],
 	description: "Changes the playback volume.",
 	userPermissions: ['MANAGE_MESSAGES'],
 	botPermissions: ['CONNECT', 'SPEAK'],

@@ -1,0 +1,34 @@
+<nav class="navbar" selectable="false">
+    <%- !user ? 
+        `<a href="/login" class="login justify-content-start">
+            <p>Login</p>
+        </a>`
+    :
+        `<div class="logged-in justify-content-start">
+            <div class="body">
+                <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?lossless=true" class="img-thumbnail rounded-circle" alt="avatar">
+                <div>
+                    <p>${user.username}</p>
+                    <p>#${user.discriminator}</p>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>`
+    %>
+    <ul style="list-style: none;" class="nav justify-content-end">
+        <%- (state == 'Home') ? `<li class="nav-item active">` : `<li class="nav-item">` %>
+            <a href="/" style="font-size:16px;color: #fff;" class="nav-link text-uppercase">Home</a>
+        </li>
+        <%- (state == 'Documentation') ? `<li class="nav-item active">` : `<li class="nav-item">` %>
+            <a href="/docs" style="font-size:16px;color: #fff;" class="nav-link text-uppercase">Docs</a>
+        </li>
+        <%- (state == 'Dashboard') ? `<li class="nav-item active">` : `<li class="nav-item">` %>
+            <a href="/dashboard" style="font-size:16px;color: #fff;" class="nav-link text-uppercase">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a href="/invite" style="font-size:16px;color: #fff;" class="nav-link text-uppercase" target="_blank" rel="noopener noreferrer">Invite</a>
+        </li>
+    </ul>
+</nav>

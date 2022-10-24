@@ -2,7 +2,7 @@ const moment = require('moment');
 
 module.exports = {
   name: 'roleinfo',
-  aliases: ['ri'],
+  aliases: ['ri','rinfo'],
   description: 'Shows the information about a role.',
   execute: async (client, message, args, db) => {
 
